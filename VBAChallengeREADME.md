@@ -14,12 +14,12 @@ This challenge in particular gave me a lot of furstration.  I attempted to refac
 
 # Analysis of Refactored Code
 Since a significant portion of the code was already present in the refactored challenge I will more specifcally cover the areas we were asked to update with our module 2 code.  
-### Step 1A
+## Step 1A
 Step 1A is relatively simple as we are asked to create an "tickerindex" variable and that varibale should be equal to zero.  As outlined in the code below:
    '1a) Create a ticker Index
     tickerindex = 0
 
-### Step 1B
+## Step 1B
 Step 1B did give me some issues when attempting to create the arrays.  
 I had been misunderstanding the values meant to exist within the () of the each array.  I believed it was meant to be an interchangeable value similiar to (i).  However the error message I recieved made me realize that it required a constant value.  Not being sure what constant value it required, I reviewed the code provided in the challenge; specifically the tickers array - where I understood the value to be 12.  
 
@@ -30,7 +30,7 @@ Step 1B further explained that we would need to establish each of the 3 new arra
     Dim tickerEndingPrices(12) As Single
 
 
-### Step 2A
+## Step 2A
 Step 2a asked for us to establish a loop that would reduce the current tickervolumes to 0 for each of the tickers.  Where this had previously been established in the Modeule work as a single line equation **tickervolumes = 0** this would need to be updated in order to become a loop.  I added the simple for loop outlined below which allowed for each ticker value to be set to 0 before we begin the heavy lifting of accruing data in the next step.
 
 ''2a) Create a for loop to initialize the tickerVolumes to zero.
@@ -40,7 +40,7 @@ Step 2a asked for us to establish a loop that would reduce the current tickervol
     Next i
 
 
-## Nest for Loops for Refactored Analysis
+# Nest for Loops for Refactored Analysis
 As mentioned above the main issue I found with the refactored code was the inclusion of the "tickerindex" variable.  Since step 3d was not originally detailed in the module 2 solution, it required a fair amount of testing and research to better understand where it should be included.  
 The hint for how to increase the volume of the current ticker volumes was not as helpful as I imagined it would be, see code below.  
             
@@ -69,27 +69,27 @@ Each time I attempted to run that code, I would recieve an overflow error messag
             tickerindex = tickerindex + 1
             End If\
 
-## Nested Loop Explanation
+# Nested Loop Explanation
 The above section of code is where the heavy lifting is happening for the variable ticker calculations.  I will walk through the interactions occuring in each section/subsection below.
 
-### Step 2B
+## Step 2B
     The 2B code **For i = 2 to Rowcount** as the comment implies, is creating the loop that will cover all the rows in the spreadsheet. Following that line I created a nested loop to cover the ticker variables with a new loop identified as j. **For j = 0 to 11**  This allows for the various tickers to be accounted fo as the "i loop" works through each of the rows. 
 
-### Step 3A
+## Step 3A
     Moving to 3A we see the calculations for "tickervolumes" array.  As mentioned above I attempted to use the hint within the Challenge instructions, however it did not assist as much as I expected.  I continued to run into overflow errors, even after attempting to update the "tickervolumes" to different data types, such as Single, Double, LongLong, etc.  
     My work around *if then* resulted in the correct values being calculated, so I proceed to adapt the rest of the formulas accordingly.  In the code below it allows for the value of tickers(j)  to be compared against the value found in Cell(i,1). Should those values be be equal it begins adding the values found in the 8th column of the "i" row, adding each consecutive row to the next.
             If Cells(i, 1).Value = tickers(j) Then
             tickerVolumes(j) = tickerVolumes(j) + Cells(i, 8).Value
             End If
 
-### Step 3B
+## Step 3B
     In 3B similar to 3A though varying slightly, we are comparing the vaules of the Cell (i,1) and that of tickers(j).  Adding a condition, that the cell value before cell(i,1) does not equal the value of tickers(j) that in order for the tickerstartingprices(j) to be equivelant to the cell value of (i,6).  Based on the results of the if then, we can safely assume that if the value of a cell preceeding the cell value, we are currently examining is not found to be euqal to one another we can arrive at the conclusion that we have found the ticker starting price for the ticker (j)
             If Cells(i, 1).Value = tickers(j) And Cells(i - 1, 1).Value <> tickers(j) Then
             tickerStartingPrices(j) = Cells(i, 6).Value
             End if
 
 
-### Step 3C
+## Step 3C
     Seciton 3C continues the small changes in code to result in the tickerendingprice(j).  Similar to the previous if then statment, we will also see 2 conditionals that need to be met in order for value of Cell(i,6) to equate to the tickerendingprice(j).  However where previously we were consider both Cell(i,1) and the Cell preceeding it i.e. Cells(i-1,1).value, we adapt the second condition to be the cell following (i,1). 
     When we compare the values found in Cell(1,6) = tickers(j) and the following cell is not found to be equal to the tickers(j) i.e. Cell(i+6,1)<>tickers(j). We can conclude that we have found the final ticker price for the corresponding ticker(j). 
 
@@ -97,7 +97,7 @@ The above section of code is where the heavy lifting is happening for the variab
             tickerEndingPrices(j) = Cells(i, 6).Value
             End If**
 
-### Step 3D
+## Step 3D
     The final workhorse for these 2 loops, can be found in 3D which requires us to incerase the value of the tickerindex we orignally established in step 1A.  Using a virtually identical if then statement as in 3C, we can find that if the Cell value of (i,1) = tickers(j) but the following cell(i+1,1) does not equal the same tickers(j) value, we must now increase the value of our tickerindex variable, since we established this variable to be 0 as in step 1A: tickerindex = 0; the solution is simply to add 1 to our value at the time of the loop.  and since the loop will run 12 times as according to loop j (i.e. **For j = 0 to 11**).  Which would allow for each of our tickers to be accounted for.  
 
             '3d Increase the tickerIndex.
@@ -111,12 +111,12 @@ The above section of code is where the heavy lifting is happening for the variab
 
     Finally we arrive at step 4 which will allow for the output of our calculations in the Nested For Loops to be generated.  This code was covered fairly well in our module 2 classwork.  
     
-### For Loop for Arrays
+## For Loop for Arrays
     First we establish the loop that will allow for us to work through our ticker array - which as previously established runs from 0 to 11.  Next we ensure that we are outputing our data to the correct sheet, requiring we input the *Worksheets Activate* command.  
         While this technically could exist outside of the for Loop, I took the extra precaution of including it to ensure that all values were output to the same sheet each time the loop ran.  
-### Ticker Array Explanation
+## Ticker Array Explanation
     Next we need to assign the i values in on both sides of the corresponding array equations.  Since the first cell output is intended to be in Cell(4,1) we must update the value to be Cell(4 + i, 1) which will allow for each unique ticker value to be placed in a new cell according to its array number.  In order to make sure we are determingin unique tickers from the array we must also include the (i) at the end of the tickers(i).
-### TickerVolumes Array Explanation
+## TickerVolumes Array Explanation
     We follow a similar structure for tickervolumes, adapting the code to Cell(4 +i,2) since we are wanting to move to the next column for output. Again we update the tickervolumes array to include the (i) at the end so we are generating unique values as we continue to move through the array.   
 ## Return Equation Explanation
     Lastly we move over 1 final column to cell(4+i,3) where we look to output our return value.  The equation being the same from our module 2 classwork, we are able to update the tickerendingprices & tickerstartingprices arrays with the (i) to allow for their unique values to be caluclated in turn as the for loop works through each (i) value. The code ends the loop with the Next i command - completeing the calculations for the assignment. 
@@ -175,14 +175,16 @@ Some of the disadvantages of refactoring code include:
     1) May require more time to understand background of refactored code.
     2) Refactoring code into a complex existing system, may have setbacks for both time and money
 
-
 ## How do these Pros & Cons Apply to Refactoring the original VBA Script?
     We are able to see how some of these advantages apply to the VBA Challenge by the nature of some of the requirements we were expected to achieve.  
 ### Advantages of refactored code examples
     1) For example we are including screenshots of the comparisons of how much time it took for our Refactored code to run, when compared to our All Stock Analysis code.  In both sets of examples posted above, we cut the processing time nearly in half.  While those time differences are barely noticable on such a small set of items, it could easily be compounded if out data set increased into hundreds of stock tickers or even thousands. Knowing that we could be spending roughly half the time computing the results would be fairly signifcant for both our tool and our ability to report on results. 
+
     2) Similarly when comparing the number of lines of code being written between the Refactored code and the All Stocks Analysis code the overall lines in the 2 process are only off by about 20 or so lines.  A relatively minisucule difference, most likely won't save too much money or time - when it comes to writing the code. However as in the previous example, as the Code gets more complex the differnce in number of lines between the operations could become very significant  
+
     3) The intention of refactored code is to make the overall structure less complex - and therefore easier to understand at a glance.  This could be incredibly beneficial for teams that are going through a reorganization interanlly, new hires who are needing to be caught up quickly on a project or projects that need to be handed off to other team members.  If for example I needed to hand off my portion of this project to my next team member, it would be easier for him/her to understand the less complex code. 
 
 ### Disadvantages of refactored code examples
     1) While the code is easier to understand at a glance - it may require additional time to understand if the code is being integrated with several other processes in development.  For example if in using refactored code I incorporated a variable or array from a seperate, but integrated subroutine, a new team member may not fully understand how this code is meant to interact with the other subroutines. If in the example of the VBA Challenge, I needed to hand off my portion to a new team member but they had not been given the full background of what we are trying to achieve; it may cause bugs in their updates of the code. 
+
     2) One of the main considerations you would need to make for including refactored code in your code, should be if it would take longer to find & redesign the code you are considering refactoring or if it may be more time efficient to write the code yourself.  If we hadn't been given a good portion of the code that we used for VBA Challenge, then it may not have been worth our time to do the research to find the coding and integrate the process into a new subroutine - when we had a working subroutine in the All Stocks Analysis
