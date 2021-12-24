@@ -43,29 +43,31 @@ Step 2a asked for us to establish a loop that would reduce the current tickervol
 ## Nest for Loops for Refactored Analysis
 As mentioned above the main issue I found with the refactored code was the inclusion of the "tickerindex" variable.  Since step 3d was not originally detailed in the module 2 solution, it required a fair amount of testing and research to better understand where it should be included.  
 The hint for how to increase the volume of the current ticker volumes was not as helpful as I imagined it would be, see code below.  
+            
             *tickervolumes(tickerindex) = tickervolumes(tickerindex) + cells(i,8).value*
+
 Each time I attempted to run that code, I would recieve an overflow error message; so having dedicated several hours to attempting it with that code I improvised a workaround - using code from Module 2 and creating a nested loop for parts 2b - 3d, using the code listed below:
 
-''2b) Loop over all the rows in the spreadsheet.
-    For i = 2 To RowCount
-    'loop for tickers
-        For j = 0 To 11
+    \'2b) Loop over all the rows in the spreadsheet.
+        For i = 2 To RowCount
+        'loop for tickers
+            For j = 0 To 11
     '3a) Increase volume for current ticker
             If Cells(i, 1).Value = tickers(j) Then
             tickerVolumes(j) = tickerVolumes(j) + Cells(i, 8).Value
             End If
-        '3b) Check if the current row is the first row with the selected tickerIndex.
+     3b) Check if the current row is the first row with the selected tickerIndex.
             If Cells(i, 1).Value = tickers(j) And Cells(i - 1, 1).Value <> tickers(j) Then
             tickerStartingPrices(j) = Cells(i, 6).Value
             End If
-        '3c) check if the current row is the last row with the selected tickers
+     '3c) check if the current row is the last row with the selected tickers
             If Cells(i, 1).Value = tickers(j) And Cells(i + 1, 1).Value <> tickers(j) Then
             tickerEndingPrices(j) = Cells(i, 6).Value
             End If
-        '3d Increase the tickerIndex.
+     '3d Increase the tickerIndex.
             If Cells(i, 1).Value = tickers(j) And Cells(i + 1, 1).Value <> tickers(j) Then
             tickerindex = tickerindex + 1
-            End If
+            End If\
 
 ## Nested Loop Explanation
 The above section of code is where the heavy lifting is happening for the variable ticker calculations.  I will walk through the interactions occuring in each section/subsection below.
@@ -116,7 +118,7 @@ The above section of code is where the heavy lifting is happening for the variab
     Next we need to assign the i values in on both sides of the corresponding array equations.  Since the first cell output is intended to be in Cell(4,1) we must update the value to be Cell(4 + i, 1) which will allow for each unique ticker value to be placed in a new cell according to its array number.  In order to make sure we are determingin unique tickers from the array we must also include the (i) at the end of the tickers(i).
 ### TickerVolumes Array Explanation
     We follow a similar structure for tickervolumes, adapting the code to Cell(4 +i,2) since we are wanting to move to the next column for output. Again we update the tickervolumes array to include the (i) at the end so we are generating unique values as we continue to move through the array.   
-### Return Equation Explanation
+## Return Equation Explanation
     Lastly we move over 1 final column to cell(4+i,3) where we look to output our return value.  The equation being the same from our module 2 classwork, we are able to update the tickerendingprices & tickerstartingprices arrays with the (i) to allow for their unique values to be caluclated in turn as the for loop works through each (i) value. The code ends the loop with the Next i command - completeing the calculations for the assignment. 
 
 '4) Loop through your arrays to output the Ticker, Total Daily Volume, and Return.
@@ -126,34 +128,61 @@ For i = 0 To 11
     Worksheets("All Stocks Analysis").Activate
     Cells(4 + i, 1).Value = tickers(i)
     Cells(4 + i, 2).Value = tickerVolumes(i)
-    Cells(4 + i, 3).Value = tickerEndingPrices(i) / tickerStartingPrices(i) - 1
-    
-Next i
+    Cells(4 + i, 3).Value = tickerEndingPrices(i) / tickerStartingPrices(i) - 1 
+    Next i
 
 # Conclusions of the Report
 
 ## Refactored Code Functionality & Timing
-While I was not able to find the solution so that the Tickerindex could be used as the index item for the seperate arrays; I was able to refactor the code from module 2 to arrive at the same chart from the module 2 class work.  And in fact the refactored code was faster than the Module 2 code we had developed from the lesson plan.  The images below display the timed differences between the AllStockAnalysis code & the Refactored images.  
+While I was not able to find the solution so that the Tickerindex could be used as the index item for the seperate arrays; I was able to refactor the code from module 2 to arrive at the same chart from the module 2 class work.  And in fact the refactored code was faster than the Module 2 code we had developed from the lesson plan.  The images below display the timed differences between the VBA Challenge Refactored Code & the All Stocks Analysis code built during the Module 2 classwork.  
 
+## VBA Challenge 2017 Timer
 ![VBA Challenge 2017 Timer](https://github.com/Gkmb2390/stock-analysis/blob/main/Resources/VBA_Challenge_2017.png)
-
+## All Stocks Analysis 2017 Timer
 ![AllStocksAnalysis 2017 Timer](https://github.com/Gkmb2390/stock-analysis/blob/main/Resources/AllStocksAnalysisComparisonTimer2017.png)
-
+## VBA Challenge 2017 Timer
 ![VBA Challenge 2018 Timer](https://github.com/Gkmb2390/stock-analysis/blob/main/Resources/VBA_Challenge_2018.png)
-
+## All Stocks Analysis 2018 Timer
 ![AllStocksAnalysis 2018 Timer](https://github.com/Gkmb2390/stock-analysis/blob/main/Resources/AllStocksAnalysisComparisonTimer2018.png)
 
 
-
-
-
-
-
-
-
-
 ## 2017 Report Conclusions
+The completed table from the 2017 reporting show that virtually every stock,except TERP, had a positive return on the year; however DQ had the highest return with 199.4%.  Steve's parents should hopefully be rather happy at this point in their investment.
+
+While high returns are most certainly a desired reult when investing in stocks, another significnat consideration is the total daily volume, which DQ was the lowest trader amognst the group trading just under 36 million shares a day. The Total Daily volume is often associated with liquity of the overall stock and how easy it would be to trade, or cash out of. 
+
+## 2018 Report Conclusions
+The complete report from 2018 shows rather the opposite of 2017 with almost every company reporting negative returns - DQ reporting the greatest loss at 62.5%. Depending on their view of stock traiding Steve's parents may be regreting their investment at this point, however the stock is still up over 100% of what they may have originally purchased.
+
+While the returns for most companies were less favorable than one might hope, we can see a significant increase in the total daily volume of the DQ stock rising to nearly 108 Million shares being traded daily.  This could be an indicator of significant growth or expansion for the company, which could indicate a strong future.  
 
 
+### Considerations & Future Inclusions for Reporting
+Something to consider in future analysis would be the original stock purchase price & number of shares.  While the nearly 200% return for DQ stock may seem significant - without clarity on the stocks original purchase price it may just be a nice number to show. 
+
+If the purcashe price was $1,000 per share or $10,000, and they have a 100 shares of stock; Steve's parents could be seeing a significant amount of money moving their way.  However if they only invest $5 in 1 share of stock that %200 increase doesn't seem as significant. 
+
+# Summary of VBA Challenge 
+
+## What are the advantages & disadvantages of Refactoring code?
+
+Some of the advantages of refactoring code include:
+    1) Time savings for calculations being run  
+    2) Fewer coding lines necessary
+    3) Less complex structures 
+
+Some of the disadvantages of refactoring code include:
+    1) May require more time to understand background of refactored code.
+    2) Refactoring code into a complex existing system, may have setbacks for both time and money
 
 
+## How do these Pros & Cons Apply to Refactoring the original VBA Script?
+    We are able to see how some of these advantages apply to the VBA Challenge by the nature of some of the requirements we were expected to achieve.  
+### Advantages of refactored code examples
+    1) For example we are including screenshots of the comparisons of how much time it took for our Refactored code to run, when compared to our All Stock Analysis code.  In both sets of examples posted above, we cut the processing time nearly in half.  While those time differences are barely noticable on such a small set of items, it could easily be compounded if out data set increased into hundreds of stock tickers or even thousands. Knowing that we could be spending roughly half the time computing the results would be fairly signifcant for both our tool and our ability to report on results. 
+    2) Similarly when comparing the number of lines of code being written between the Refactored code and the All Stocks Analysis code the overall lines in the 2 process are only off by about 20 or so lines.  A relatively minisucule difference, most likely won't save too much money or time - when it comes to writing the code. However as in the previous example, as the Code gets more complex the differnce in number of lines between the operations could become very significant  
+    3) The intention of refactored code is to make the overall structure less complex - and therefore easier to understand at a glance.  This could be incredibly beneficial for teams that are going through a reorganization interanlly, new hires who are needing to be caught up quickly on a project or projects that need to be handed off to other team members.  If for example I needed to hand off my portion of this project to my next team member, it would be easier for him/her to understand the less complex code. 
+
+### Disadvantages of refactored code examples
+    1) While the code is easier to understand at a glance - it may require additional time to understand if the code is being integrated with several other processes in development.  For example if in using refactored code I incorporated a variable or array from a seperate, but integrated subroutine, a new team member may not fully understand how this code is meant to interact with the other subroutines. If in the example of the VBA Challenge, I needed to hand off my portion to a new team member but they had not been given the full background of what we are trying to achieve; it may cause bugs in their updates of the code. 
+    2) One of the main considerations you would need to make for including refactored code in your code, should be if it would take longer to find & redesign the code you are considering refactoring or if it may be more time efficient to write the code yourself.  If we hadn't been given a good portion of the code that we used for VBA Challenge, then it may not have been worth our time to do the research to find the coding and integrate the process into a new subroutine - when we had a working subroutine in the All Stocks Analysis
