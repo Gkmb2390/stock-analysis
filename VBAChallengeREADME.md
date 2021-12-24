@@ -135,13 +135,13 @@ Next i
 ## Refactored Code Functionality & Timing
 While I was not able to find the solution so that the Tickerindex could be used as the index item for the seperate arrays; I was able to refactor the code from module 2 to arrive at the same chart from the module 2 class work.  And in fact the refactored code was faster than the Module 2 code we had developed from the lesson plan.  The images below display the timed differences between the AllStockAnalysis code & the Refactored images.  
 
-![VBA Challenge 2017 Timer]()
+![VBA Challenge 2017 Timer](https://github.com/Gkmb2390/stock-analysis/blob/main/Resources/VBA_Challenge_2017.png)
 
-![AllStocksAnalysis 2017 Timer]()
+![AllStocksAnalysis 2017 Timer](https://github.com/Gkmb2390/stock-analysis/blob/main/Resources/AllStocksAnalysisComparisonTimer2017.png)
 
-![VBA Challenge 2018 Timer]()
+![VBA Challenge 2018 Timer](https://github.com/Gkmb2390/stock-analysis/blob/main/Resources/VBA_Challenge_2018.png)
 
-![AllStocksAnalysis 2018 Timer]()
+![AllStocksAnalysis 2018 Timer](https://github.com/Gkmb2390/stock-analysis/blob/main/Resources/AllStocksAnalysisComparisonTimer2018.png)
 
 
 
