@@ -140,7 +140,7 @@ While I was not able to find the solution so that the Tickerindex could be used 
 ![VBA Challenge 2017 Timer](https://github.com/Gkmb2390/stock-analysis/blob/main/Resources/VBA_Challenge_2017.png)
 ## All Stocks Analysis 2017 Timer
 ![AllStocksAnalysis 2017 Timer](https://github.com/Gkmb2390/stock-analysis/blob/main/Resources/AllStocksAnalysisComparisonTimer2017.png)
-## VBA Challenge 2017 Timer
+## VBA Challenge 2018 Timer
 ![VBA Challenge 2018 Timer](https://github.com/Gkmb2390/stock-analysis/blob/main/Resources/VBA_Challenge_2018.png)
 ## All Stocks Analysis 2018 Timer
 ![AllStocksAnalysis 2018 Timer](https://github.com/Gkmb2390/stock-analysis/blob/main/Resources/AllStocksAnalysisComparisonTimer2018.png)
